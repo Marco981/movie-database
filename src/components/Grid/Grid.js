@@ -13,7 +13,13 @@ const grid = props => {
       />
     )
   })
-  return <div className={styles.Grid}>{cards}</div>
+  return props.error ? (
+    <div className={styles.ErrorMessage}>
+      Sorry, there was a problem with your search. Please try again
+    </div>
+  ) : (
+    <div className={styles.Grid}>{cards}</div>
+  )
 }
 
 export default grid
