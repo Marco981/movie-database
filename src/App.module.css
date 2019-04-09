@@ -1,0 +1,6 @@
+.App {
+  text-align: center;
+  background:linear-gradient(120deg, #1D89F4, #00DB78, #F7BF18, #d33131);
+      height: 100vh;
+    overflow: scroll;
+}
