@@ -1,17 +1,11 @@
 import React from 'react'
+import styles from './Form.module.css'
 
 const form = props => (
-  <div>
-    <input onChange={props.changed} type='text' />
+  <form className={styles.Form}>
+    <input onChange={props.changed} value={props.value} type='text' />
     <button onClick={props.clicked}>Search!</button>
-    <select>
-      <option />
-      <option />
-      <option />
-      <option />
-    </select>
-    <select />
-  </div>
+  </form>
 )
 
 export default form
