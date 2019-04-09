@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './App.css'
+import styles from './App.module.css'
 import Form from './components/Form/Form'
 import Grid from './components/Grid/Grid'
 import axios from 'axios'
@@ -9,7 +9,7 @@ import axios from 'axios'
 class App extends Component {
   state = {
     moviesList: [],
-    inputValue: null,
+    inputValue: '',
     error: null
   }
 
@@ -19,7 +19,8 @@ class App extends Component {
     })
   }
 
-  findMoviesHandler = () => {
+  findMoviesHandler = e => {
+    e.preventDefault()
     axios
       .get('http://www.omdbapi.com/?i=tt3896198&apikey=63f46646', {
         params: {
@@ -27,11 +28,13 @@ class App extends Component {
         }
       })
       .then(response => {
-        const movies = response.data.Search.slice(0, 7)
-        console.log(movies)
-
+        const movies = response.data.Search.sort((a, b) => {
+          return b['Year'] - a['Year']
+        })
+        console.log(response.data)
         this.setState({
-          moviesList: movies
+          moviesList: movies,
+          inputValue: ''
         })
       })
       .catch(error => {
@@ -42,7 +45,7 @@ class App extends Component {
 
   render () {
     return (
-      <div className='App'>
+      <div className={styles.App}>
         <Form
           value={this.state.inputValue}
           changed={e => this.inputChangedHandler(e)}
