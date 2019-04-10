@@ -3,6 +3,7 @@ import styles from './App.module.css'
 import Form from './components/Form/Form'
 import Grid from './components/Grid/Grid'
 import axios from 'axios'
+import TopBar from './components/TopBar/TopBar'
 
 // axios.defaults.baseURL =
 
@@ -10,7 +11,7 @@ class App extends Component {
   state = {
     moviesList: [],
     inputValue: '',
-    error: null
+    error: false
   }
 
   inputChangedHandler = e => {
@@ -33,6 +34,7 @@ class App extends Component {
         })
         console.log(response.data)
         this.setState({
+          error: false,
           moviesList: movies,
           inputValue: ''
         })
@@ -46,12 +48,13 @@ class App extends Component {
   render () {
     return (
       <div className={styles.App}>
+        <TopBar />
         <Form
           value={this.state.inputValue}
           changed={e => this.inputChangedHandler(e)}
           clicked={this.findMoviesHandler}
         />
-        <Grid movies={this.state.moviesList} />
+        <Grid error={this.state.error} movies={this.state.moviesList} />
       </div>
     )
   }
