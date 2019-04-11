@@ -25,7 +25,7 @@ class App extends Component {
     axios
       .get('http://www.omdbapi.com/?i=tt3896198&apikey=63f46646', {
         params: {
-          s: this.state.inputValue
+          s: this.state.inputValue.toLowerCase()
         }
       })
       .then(response => {
