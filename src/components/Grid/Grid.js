@@ -10,6 +10,7 @@ const grid = props => {
         title={movie.Title}
         poster={movie.Poster}
         year={movie.Year}
+        imdbId={movie.imdbID}
       />
     )
   })
