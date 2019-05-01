@@ -1,15 +1,77 @@
 .Card {
-    margin:  1rem;
-    border-radius:10px;
-    border: 1px solid white;
+    margin: 1rem;
+    border-radius: 10px;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
     font-family: 'Merienda';
     position:relative;
+    perspective: 150rem;
+    height:350px;
 }
 
-.Button {
+.Card__front,
+.Card__back {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: 0;
+    width: 100%;
+    backface-visibility: hidden;
+    transition: transform .5s ease-out;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.Card__front {
+    transform: rotateY(0);
+}
+
+.Card__back {
+    transform: rotateY(-180deg);
+}
+
+.Card:hover .Card__front {
+    transform:rotateY(180deg);
+}
+
+.Card:hover .Card__back {
+    transform: rotateY(0);
+}
+
+.Card__imgContainer {
+    width: 100%;
+    height: 70%;
+    flex-grow:1;
+}
+
+.Card__img {
+    width:100%;
+    height:auto;
+    border-radius:10px;
+    max-height:350px;
+}
+
+.Card h2 {
+    font-size: 1.1rem;
+    color:white;
+}
+
+.Card__titleContainer {
+    height: 30%;
+    position: absolute;
+    bottom: 0rem;
+    box-sizing: border-box;
+    left: 0;
+    padding: 1rem;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    border-radius:0 0 10px 10px;
+
+    
+}
+
+/* .Button {
     background: green;
     text-decoration: none;
     color: white;
@@ -27,38 +89,4 @@
     color:green;
     background-color: white;
     border:1px solid green;
-}
-
-.hover > .Button{
-    background:black;
-}
-
-.Card__imgContainer {
-    width: 100%;
-    height: 70%;
-    overflow: hidden;
-    flex-grow:1;
-}
-
-.Card__img {
-    width:100%;
-    height:auto;
-    transform:scale(0.9);
-    transition:transform ease-in-out .4s;
-    border-radius:10px 10px 0 0;
-    max-height:350px;
-
-}
-
-.Card__img:hover {
-    transform:scale(1);
-}
-
-.Card h2 {
-    font-size: 1.1rem;
-    color:white;
-}
-
-.Card__description {
-    padding-bottom:1rem;
-}
+} */
