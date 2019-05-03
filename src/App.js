@@ -23,16 +23,19 @@ class App extends Component {
   findMoviesHandler = e => {
     e.preventDefault()
     axios
-      .get('http://www.omdbapi.com/?i=tt3896198&apikey=63f46646', {
-        params: {
-          s: this.state.inputValue.toLowerCase()
+      .get(
+        'https://api.themoviedb.org/3/search/movie?api_key=e16c1f5204dd23fdebe3cf4ed1ca9581',
+        {
+          params: {
+            query: this.state.inputValue.toLowerCase()
+          }
         }
-      })
+      )
       .then(response => {
-        const movies = response.data.Search.sort((a, b) => {
+        console.log(response.data.results)
+        const movies = response.data.results.sort((a, b) => {
           return b['Year'] - a['Year']
         })
-        console.log(response.data)
         this.setState({
           error: false,
           moviesList: movies,
