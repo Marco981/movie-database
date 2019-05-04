@@ -25,6 +25,7 @@
 
 .Card__front {
     transform: rotateY(0);
+    overflow: hidden;
 }
 
 .Card__back {
@@ -52,9 +53,13 @@
     max-height:350px;
 }
 
+.Card h2,
+.Card p {
+    color:white;
+}
+
 .Card h2 {
     font-size: 1.1rem;
-    color:white;
 }
 
 .Card__titleContainer {
