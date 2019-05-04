@@ -4,6 +4,7 @@ import Form from './components/Form/Form'
 import Grid from './components/Grid/Grid'
 import axios from 'axios'
 import TopBar from './components/TopBar/TopBar'
+import Pagination from './components/Pagination/Pagination'
 
 // axios.defaults.baseURL =
 
@@ -11,7 +12,9 @@ class App extends Component {
   state = {
     moviesList: [],
     inputValue: '',
-    error: false
+    error: false,
+    page: null,
+    totalPages: null
   }
 
   inputChangedHandler = e => {
@@ -32,14 +35,24 @@ class App extends Component {
         }
       )
       .then(response => {
-        console.log(response.data.results)
-        const movies = response.data.results.sort((a, b) => {
-          return b['Year'] - a['Year']
-        })
+        const totalPages = response.data.total_pages
+        const page = response.data.page
+        const movies = response.data.results
+          .map(movie => ({
+            ...movie,
+            year: new Date(movie.release_date).getFullYear()
+          }))
+          .sort((a, b) => {
+            const aYear = new Date(a['release_date']).getFullYear()
+            const bYear = new Date(b['release_date']).getFullYear()
+            return bYear - aYear
+          })
         this.setState({
           error: false,
           moviesList: movies,
-          inputValue: ''
+          inputValue: '',
+          totalPages: totalPages,
+          page: page
         })
       })
       .catch(error => {
@@ -58,6 +71,7 @@ class App extends Component {
           clicked={this.findMoviesHandler}
         />
         <Grid error={this.state.error} movies={this.state.moviesList} />
+        <Pagination numPages={this.state.totalPages} />
       </div>
     )
   }

@@ -6,11 +6,12 @@ const grid = props => {
   const cards = props.movies.map(movie => {
     return (
       <Card
-        key={movie.imdbID}
-        title={movie.Title}
-        poster={movie.Poster}
-        year={movie.Year}
-        imdbId={movie.imdbID}
+        key={movie.id}
+        title={movie.title}
+        poster={movie.poster_path}
+        releaseYear={movie.year}
+        overview={movie.overview}
+        backdrop={movie.backdrop_path}
       />
     )
   })
