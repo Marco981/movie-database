@@ -1,0 +1,12 @@
+.Pagination {
+    display:flex;
+    justify-content: center;
+}
+
+.PageDiv {
+    padding:1rem;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin: .5rem;
+}
