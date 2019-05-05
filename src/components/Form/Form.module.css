@@ -2,6 +2,8 @@
     padding:2rem 1rem;
     display:flex;
     justify-content: center;
+    margin-top: 5rem;
+    flex-wrap:wrap;
 }
 
 .Form input[type=text] {
@@ -11,6 +13,7 @@
     background: transparent;
     color:white;
     font-size:2rem;
+    /* flex-basis: 70%; */
 }
 
 .Form button {
@@ -19,4 +22,16 @@
     color:white;
     background:#0e9ff3;
     border-radius: 0 10px 10px 0;
+}
+
+@media (max-width:600px) {
+    .Form input[type=text] {
+        flex-basis:70%;
+    }
+    
+    .Form button {
+        margin-top: 1rem;
+        padding:1rem;
+        border-radius:10px;
+    }
 }
