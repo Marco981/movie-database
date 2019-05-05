@@ -1,6 +1,7 @@
 .Pagination {
     display:flex;
     justify-content: center;
+    flex-wrap:wrap;
 }
 
 .PageDiv {
@@ -9,4 +10,12 @@
     border: 1px solid white;
     border-radius: 10px;
     margin: .5rem;
+    transition:all .3s ease-in-out;
+}
+
+.PageDiv:hover,
+.PageDiv.active {
+    cursor:pointer;
+    background:white;
+    color:black;
 }

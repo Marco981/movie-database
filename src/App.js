@@ -12,6 +12,7 @@ class App extends Component {
   state = {
     moviesList: [],
     inputValue: '',
+    savedSearch: '',
     error: false,
     page: null,
     totalPages: null
@@ -19,33 +20,34 @@ class App extends Component {
 
   inputChangedHandler = e => {
     this.setState({
-      inputValue: e.target.value
+      inputValue: e.target.value,
+      savedSearch: e.target.value
     })
   }
 
-  findMoviesHandler = e => {
-    e.preventDefault()
+  findMoviesHandler = (movie, pageId) => {
+    const query = pageId ? this.state.savedSearch : this.state.inputValue
     axios
       .get(
         'https://api.themoviedb.org/3/search/movie?api_key=e16c1f5204dd23fdebe3cf4ed1ca9581',
         {
           params: {
-            query: this.state.inputValue.toLowerCase()
+            query: query.toLowerCase(),
+            page: pageId || null
           }
         }
       )
       .then(response => {
         const totalPages = response.data.total_pages
         const page = response.data.page
+        // console.log(response.data)
         const movies = response.data.results
           .map(movie => ({
             ...movie,
-            year: new Date(movie.release_date).getFullYear()
+            year: movie.release_date.split('-')[0]
           }))
           .sort((a, b) => {
-            const aYear = new Date(a['release_date']).getFullYear()
-            const bYear = new Date(b['release_date']).getFullYear()
-            return bYear - aYear
+            return b.year - a.year
           })
         this.setState({
           error: false,
@@ -61,6 +63,11 @@ class App extends Component {
       })
   }
 
+  changePageHandler = id => {
+    const movie = this.state.savedSearch
+    this.findMoviesHandler(movie, id)
+  }
+
   render () {
     return (
       <div className={styles.App}>
@@ -71,7 +78,12 @@ class App extends Component {
           clicked={this.findMoviesHandler}
         />
         <Grid error={this.state.error} movies={this.state.moviesList} />
-        <Pagination numPages={this.state.totalPages} />
+        <Pagination
+          error={this.state.error}
+          page={this.state.page}
+          clicked={e => this.changePageHandler(e.target.innerText)}
+          numPages={this.state.totalPages}
+        />
       </div>
     )
   }
