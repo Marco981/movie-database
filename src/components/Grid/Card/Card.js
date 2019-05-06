@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styles from './Card.module.css'
-import noImg from '../../../assets/images/zombomeme05052019174959.jpg'
+import noImg from '../../../assets/images/no-image.jpg'
 
 const card = props => {
   const imageURL = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'
@@ -13,7 +14,6 @@ const card = props => {
   //   filter: 'blur(8px)',
   //   height: '100%'
   // }
-
   return (
     <div className={styles.Card}>
       <div className={styles.Card__front}>
@@ -32,9 +32,9 @@ const card = props => {
       <div className={styles.Card__back}>
         <h2>Movie description</h2>
         <p>{props.overview}</p>
-        <a href='' className={styles.Button}>
+        <Link to={'/' + props.movieId} className={styles.Button}>
           More Info
-        </a>
+        </Link>
       </div>
     </div>
   )
