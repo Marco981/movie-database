@@ -1,17 +1,18 @@
 import React from 'react'
-import Card from './Card/Card'
 import styles from './Grid.module.css'
+import Card from './Card/Card'
 
 const grid = props => {
   const cards = props.movies.map(movie => {
     return (
       <Card
-        key={movie.id}
         title={movie.title}
         poster={movie.poster_path}
         releaseYear={movie.year}
         overview={movie.overview}
         backdrop={movie.backdrop_path}
+        movieId={movie.id}
+        key={movie.id}
       />
     )
   })
