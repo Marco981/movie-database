@@ -1,6 +1,21 @@
+
 .App {
   text-align: center;
   background:linear-gradient(120deg, #1D89F4, #00DB78, #F7BF18, #d33131);
-      height: 100vh;
-    overflow: scroll;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.App .Subtitle {
+  animation: fadein 1s ease-in 0s forwards 1;
+  color:white;
+  padding:0 1rem;
+  font-size: 1.2rem;
+  opacity: 1;
+}
+
+@keyframes fadein {
+  0% {opacity: 0;}
+  80% {opacity: 0;}
+  100% {opacity: 1;}
 }
