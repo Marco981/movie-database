@@ -5,6 +5,7 @@ import Form from './components/Form/Form'
 import Grid from './components/Grid/Grid'
 import axios from 'axios'
 import TopBar from './components/TopBar/TopBar'
+import Layout from './containers/Layout/Layout'
 import MovieDetails from './components/MovieDetails/MovieDetails'
 import Pagination from './components/Pagination/Pagination'
 
@@ -74,29 +75,30 @@ class App extends Component {
     return (
       <Router>
         <div className={styles.App}>
-          <TopBar />
-          {/* <Switch> */}
-          {/* <Route path='/' exact component={Form} />
+          <Layout>
+            <p className={styles.Subtitle}>
+              Honestly, the best place on the internet to find informations
+              about your favourite movies
+            </p>
+            {/* <Switch> */}
+            {/* <Route path='/' exact component={Form} />
           <Route path='/' exact component={Grid} />
           <Route path='/' exact component={Pagination} />
           <Route path='/:id' exact component={MovieDetails} /> */}
-          {/* </Switch> */}
-          <p className={styles.Subtitle}>
-            Honestly, the best place on the internet to find informations about
-            your favourite movies
-          </p>
-          <Form
-            value={this.state.inputValue}
-            changed={e => this.inputChangedHandler(e)}
-            clicked={this.findMoviesHandler}
-          />
-          <Grid error={this.state.error} movies={this.state.moviesList} />
-          <Pagination
-            error={this.state.error}
-            page={this.state.page}
-            clicked={e => this.changePageHandler(e.target.innerText)}
-            numPages={this.state.totalPages}
-          />
+            {/* </Switch> */}
+            <Form
+              value={this.state.inputValue}
+              changed={e => this.inputChangedHandler(e)}
+              clicked={this.findMoviesHandler}
+            />
+            <Grid error={this.state.error} movies={this.state.moviesList} />
+            <Pagination
+              error={this.state.error}
+              page={this.state.page}
+              clicked={e => this.changePageHandler(e.target.innerText)}
+              numPages={this.state.totalPages}
+            />
+          </Layout>
         </div>
       </Router>
     )
