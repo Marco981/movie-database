@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import styles from './App.module.css'
 import Form from './components/Form/Form'
 import Grid from './components/Grid/Grid'
 import axios from 'axios'
-import TopBar from './components/TopBar/TopBar'
 import Layout from './containers/Layout/Layout'
 import MovieDetails from './components/MovieDetails/MovieDetails'
 import Pagination from './components/Pagination/Pagination'
@@ -43,7 +42,6 @@ class App extends Component {
       .then(response => {
         const totalPages = response.data.total_pages
         const page = response.data.page
-        // console.log(response.data)
         const movies = response.data.results
           .map(movie => ({
             ...movie,
@@ -52,13 +50,17 @@ class App extends Component {
           .sort((a, b) => {
             return b.year - a.year
           })
-        this.setState({
-          error: false,
-          moviesList: movies,
-          inputValue: '',
-          totalPages: totalPages,
-          page: page
-        })
+        movies.length > 0
+          ? this.setState({
+            error: false,
+            moviesList: movies,
+            inputValue: '',
+            totalPages: totalPages,
+            page: page
+          })
+          : this.setState({
+            error: true
+          })
       })
       .catch(error => {
         console.log(error)
@@ -73,34 +75,30 @@ class App extends Component {
 
   render () {
     return (
-      <Router>
-        <div className={styles.App}>
-          <Layout>
-            <p className={styles.Subtitle}>
-              Honestly, the best place on the internet to find informations
-              about your favourite movies
-            </p>
-            {/* <Switch> */}
-            {/* <Route path='/' exact component={Form} />
-          <Route path='/' exact component={Grid} />
-          <Route path='/' exact component={Pagination} />
-          <Route path='/:id' exact component={MovieDetails} /> */}
-            {/* </Switch> */}
-            <Form
-              value={this.state.inputValue}
-              changed={e => this.inputChangedHandler(e)}
-              clicked={this.findMoviesHandler}
-            />
-            <Grid error={this.state.error} movies={this.state.moviesList} />
-            <Pagination
-              error={this.state.error}
-              page={this.state.page}
-              clicked={e => this.changePageHandler(e.target.innerText)}
-              numPages={this.state.totalPages}
-            />
-          </Layout>
-        </div>
-      </Router>
+      <div className={styles.App}>
+        <Layout>
+          <p className={styles.Subtitle}>
+            Honestly, the best place on the internet to find informations about
+            your favourite movies
+          </p>
+          <Form
+            value={this.state.inputValue}
+            changed={e => this.inputChangedHandler(e)}
+            clicked={this.findMoviesHandler}
+          />
+          <Grid error={this.state.error} movies={this.state.moviesList} />
+          <Pagination
+            error={this.state.error}
+            page={this.state.page}
+            clicked={e => this.changePageHandler(e.target.innerText)}
+            numPages={this.state.totalPages}
+          />
+        </Layout>
+        <Switch>
+          {/* <Route path='/' exact component={Form} /> */}
+          <Route path='/:id' exact component={MovieDetails} />
+        </Switch>
+      </div>
     )
   }
 }
