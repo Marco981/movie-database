@@ -1,0 +1,10 @@
+* Pagination for the movies
+    * First hand-made
+    * Study / try-out one JS library
+
+* Like functionality
+    * Click like, save into a global object with the likes of the user (you will lose the likes everytime you restart the app)
+    * Switch to browser local storage the app memory
+
+* Recommendations functionality
+    * Recommend most-liked genre

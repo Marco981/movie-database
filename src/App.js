@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+// import { Route, Switch } from 'react-router-dom'
 import styles from './App.module.css'
 import Form from './components/Form/Form'
 import Grid from './components/Grid/Grid'
@@ -94,10 +94,10 @@ class App extends Component {
             numPages={this.state.totalPages}
           />
         </Layout>
-        <Switch>
-          {/* <Route path='/' exact component={Form} /> */}
-          <Route path='/:id' exact component={MovieDetails} />
-        </Switch>
+        {/* <Switch> */}
+        {/* <Route path='/' exact component={Form} /> */}
+        {/* <Route path='/:id' exact component={MovieDetails} /> */}
+        {/* </Switch> */}
       </div>
     )
   }
