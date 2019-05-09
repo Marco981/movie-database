@@ -10,7 +10,7 @@ class Layout extends Component {
         <div>
           <TopBar />
         </div>
-        <main className={styles.Layout}>{this.props.children}</main>
+        <main className={styles.Layout}> {this.props.children}</main>
       </Aux>
     )
   }
